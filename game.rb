@@ -67,4 +67,5 @@ def first_story first
 end
 
 first_story first_response
-puts $honey
+
+puts "After leaving the first planet, your family comes face to face with a roving gang of space pirates. They want to loot your spaceship. Do you fight the pirates or give them your honey?"
