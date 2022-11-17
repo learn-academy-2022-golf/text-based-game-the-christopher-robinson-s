@@ -13,6 +13,7 @@ puts "The earth has been destroyed.... You are the last hope for humanity. \nYou
 gets
 puts "You have encountered your first planet, it is barren and rocky and you see no signs of life. \n Do you want to stop and explore for the chance to find more honey or do you continue your journey?"
 $honey = 5
+$power = ""
 $characters = ["winnie", "piglet", "rabbit", "christopher", "owl", "tigger", "eyeore"]
 first_response = gets.chomp.downcase
 def first_story first
@@ -49,7 +50,7 @@ def first_story first
                 $honey -= 1
                 puts "You leave the planet you have #{$honey} honey left"
             else
-                puts "you can only enter or leave \n"
+              puts "you can only enter or leave \n"
                 new_r = gets.chomp.downcase
                 second_story new_r
             end
@@ -67,5 +68,64 @@ def first_story first
 end
 
 first_story first_response
-
-puts "After leaving the first planet, your family comes face to face with a roving gang of space pirates. They want to loot your spaceship. Do you fight the pirates or give them your honey?"
+puts "Press enter to continue \n"
+gets 
+puts "After leaving the first planet, your family comes face to face with a roving gang of space pirates. They want to loot your spaceship. Do you fight the pirates or give them your honey?" 
+response=gets.chomp.downcase
+def pirates_encounter res 
+    if res.include? "fight"
+        options=["You fight the pirates and win, you get 2 honey \n \n", "Sacrifice a team member to escape the pirates. \n \n"]
+       result=option=options.sample 
+       if result==options[0]
+        
+           $honey+=2
+        puts result + "You have #{$honey} honey left \n"
+       end 
+       if result==options[1] 
+              $honey-=1 
+     
+        death = $characters.sample
+        $characters.delete death
+        puts "#{death} sacrificed them selfs for you to escape!" + "You have #{$honey} honey left \n"   end
+    elsif res.include? "give"
+        puts "You give the pirates your honey and they leave you alone \n \n"
+        $honey -= 2
+    else
+        puts "must say either fight or give \n"
+        new_res = gets.chomp.downcase
+        pirates_encounter new_res
+    end
+end 
+pirates_encounter response 
+puts "Press enter to continue \n"
+gets    
+puts "After leaving the pirates, you come across a planet that is covered in a water. You can't see anything. Do you want to explore the planet or leave? \n \n" 
+response = gets.chomp.downcase
+def water_planet res 
+    if res.include? "explore"
+    puts "After a long journey, You and your crew grow thirsty. You find a river and decide to drink from it. Do you drink the water or not? \n \n" 
+    drink_response = gets.chomp.downcase 
+         def drink_water drink 
+            if drink.include? "drink"
+                puts "You and your crew drink the water and gain super powers. What super powers do you want? confetti hands, greasy hands, cheeto fingers \n \n"
+                super_power = gets.chomp.downcase
+                def super_powers power
+                  if power.include? "confetti" || "greasy" || "cheeto " 
+                    $power = power
+                    puts "You and your crew have #{power} hands. You can now fly to the next planet. \n \n"
+                  end
+                end
+                elsif drink.include? "not"
+                puts "You and your crew continue on your journey. \n \n"
+            else
+                puts "must say either drink or not \n"
+                new_drink = gets.chomp.downcase
+                drink_water new_drink
+            end 
+        end
+        drink_water drink_response
+    end    
+              
+            
+end 
+water_planet response
